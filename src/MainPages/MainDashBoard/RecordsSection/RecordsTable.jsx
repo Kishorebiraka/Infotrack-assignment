@@ -54,13 +54,19 @@ const RecordsTable = ({ searchText }) => {
 		setIsDeleted(rowItem);
 	};
 
-	useEffect(() => {
-		getTableRecordsApiCall().then((res) => {
-			if (res?.status === 200) {
-				setTableRecords(res?.data);
-				setFilteredTableList(res?.data);
+	useEffect(async () => {
+		const response = await getTableRecordsApiCall();
+		try {
+			if (response?.status === 200) {
+				setTableRecords(response?.data);
+				setFilteredTableList(response?.data);
 			}
-		});
+		} catch (error) {
+			console.log(error, "error");
+			alert("Error while fetching records!!!");
+			setTableRecords([]);
+			setFilteredTableList([]);
+		}
 	}, []);
 
 	useEffect(() => {

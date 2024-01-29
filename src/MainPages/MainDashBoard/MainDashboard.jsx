@@ -7,7 +7,6 @@ import Records from "./RecordsSection/Records";
 const MainDashboard = () => {
 	return (
 		<Box
-			border="5px solid yellow"
 			position={"absolute"}
 			left={"10rem"}
 			width="calc(100% - 10rem)"
