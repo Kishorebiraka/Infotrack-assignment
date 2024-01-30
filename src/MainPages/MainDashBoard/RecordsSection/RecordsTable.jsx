@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, memo } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -24,7 +24,7 @@ export const tableHeaders = [
 	"Delete",
 ];
 
-const RecordsTable = ({ searchText }) => {
+const RecordsTable = memo(({ searchText }) => {
 	const dashboardContextApi = useContext(dashBoardContext);
 
 	const { tableRecords, setTableRecords, selectedRecords, setSelectedRecords } =
@@ -50,11 +50,28 @@ const RecordsTable = ({ searchText }) => {
 		}
 	};
 
+	const handleSearchResults = () => {
+		if (searchText?.length) {
+			const tableList = filteredTableList?.filter((each) => {
+				if (
+					each?.title.toLowerCase().includes(searchText.toLowerCase()) ||
+					each?.category.toLowerCase().includes(searchText.toLowerCase())
+				) {
+					return each;
+				}
+			});
+
+			setFilteredTableList(tableList);
+		} else {
+			setFilteredTableList(tableRecords);
+		}
+	};
+
 	const handleDeleteRecord = (rowItem) => {
 		setIsDeleted(rowItem);
 	};
 
-	useEffect(async () => {
+	async function handleGetTableRecordApiCall() {
 		const response = await getTableRecordsApiCall();
 		try {
 			if (response?.status === 200) {
@@ -67,6 +84,10 @@ const RecordsTable = ({ searchText }) => {
 			setTableRecords([]);
 			setFilteredTableList([]);
 		}
+	}
+
+	useEffect(() => {
+		handleGetTableRecordApiCall();
 	}, []);
 
 	useEffect(() => {
@@ -80,22 +101,7 @@ const RecordsTable = ({ searchText }) => {
 	}, [isDeleted]);
 
 	useEffect(() => {
-		if (searchText?.length) {
-			const tableList = filteredTableList?.filter((each) => {
-				if (
-					each?.title.toLowerCase().includes(searchText.toLowerCase()) ||
-					each?.category.toLowerCase().includes(searchText.toLowerCase())
-				) {
-					return each;
-				}
-			});
-
-			console.log(tableList, "jjjjjjjj");
-
-			setFilteredTableList(tableList);
-		} else {
-			setFilteredTableList(tableRecords);
-		}
+		handleSearchResults();
 	}, [searchText]);
 
 	return (
@@ -157,9 +163,11 @@ const RecordsTable = ({ searchText }) => {
 				)}
 			</TableContainer>
 
-			<SuccessModal isDeleted={isDeleted} setIsDeleted={setIsDeleted} />
+			{isDeleted && (
+				<SuccessModal isDeleted={isDeleted} setIsDeleted={setIsDeleted} />
+			)}
 		</>
 	);
-};
+});
 
 export default RecordsTable;

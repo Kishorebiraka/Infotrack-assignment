@@ -1,9 +1,9 @@
 import { Box } from "@mui/material";
 import Typography from "@mui/material/Typography";
-import React from "react";
+import React, { memo } from "react";
 import RecordBarChart from "./BarCharts/RecordBarChart";
 import SelectedRecordsTable from "./SelectedRecordsTable";
-const SelectedRecords = () => {
+const SelectedRecords = memo(() => {
 	return (
 		<Box
 			sx={{
@@ -41,6 +41,6 @@ const SelectedRecords = () => {
 			</Box>
 		</Box>
 	);
-};
+});
 
 export default SelectedRecords;

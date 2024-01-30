@@ -1,9 +1,9 @@
 import { Box } from "@mui/material";
 import Typography from "@mui/material/Typography";
-import React from "react";
+import React, { memo } from "react";
 import ReactECharts from "echarts-for-react";
 
-const RecordBarChart = () => {
+const RecordBarChart = memo(() => {
 	const options = {
 		grid: { top: 20, right: 40, bottom: 20, left: 40 },
 
@@ -115,6 +115,6 @@ const RecordBarChart = () => {
 			</Box>
 		</Box>
 	);
-};
+});
 
 export default RecordBarChart;

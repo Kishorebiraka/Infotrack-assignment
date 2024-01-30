@@ -8,12 +8,12 @@ import { createContext, useContext, useState } from "react";
 
 export const dashBoardContext = createContext();
 
+
 function App() {
 	const [tableRecords, setTableRecords] = useState([]);
 
 	const [selectedRecords, setSelectedRecords] = useState([]);
 
-	const handleSelectedRecords = () => {};
 
 	return (
 		<dashBoardContext.Provider
@@ -22,7 +22,6 @@ function App() {
 				setTableRecords,
 				selectedRecords,
 				setSelectedRecords,
-				handleSelectedRecords,
 			}}
 		>
 			<Box

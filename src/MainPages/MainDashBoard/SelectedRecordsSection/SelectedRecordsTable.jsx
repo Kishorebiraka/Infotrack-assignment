@@ -6,15 +6,14 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import React, { useContext } from "react";
+import React, { useContext, memo } from "react";
 import { tableHeaders } from "../RecordsSection/RecordsTable";
 import { dashBoardContext } from "./../../../App";
 
-const SelectedRecordsTable = () => {
+const SelectedRecordsTable = memo(() => {
 	const dashBoardContextApi = useContext(dashBoardContext);
 
-	const { handleSelectedRecords, selectedRecords, setSelectedRecords } =
-		dashBoardContextApi;
+	const { selectedRecords, setSelectedRecords } = dashBoardContextApi;
 
 	return (
 		<TableContainer>
@@ -66,6 +65,6 @@ const SelectedRecordsTable = () => {
 			)}
 		</TableContainer>
 	);
-};
+});
 
 export default SelectedRecordsTable;

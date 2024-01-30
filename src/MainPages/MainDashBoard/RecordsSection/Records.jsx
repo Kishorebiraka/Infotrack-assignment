@@ -1,9 +1,9 @@
 import { Box, Typography } from "@mui/material";
-import React, { useState } from "react";
+import React, { useState, memo } from "react";
 import RecordsTable from "./RecordsTable";
 import { debounceEffect } from "../../../utils";
 
-const Records = () => {
+const Records = memo(() => {
 	const [searchText, setSearchText] = useState("");
 
 	const handleChange = (text) => {
@@ -49,6 +49,6 @@ const Records = () => {
 			<RecordsTable searchText={searchText} />
 		</Box>
 	);
-};
+});
 
 export default Records;

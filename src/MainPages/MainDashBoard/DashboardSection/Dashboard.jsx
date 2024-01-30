@@ -1,10 +1,10 @@
-import React from "react";
+import React, { memo } from "react";
 import { Box } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import DashboardCard from "./DashboardCard";
 import { dashboardCardsList } from "./config";
 
-const Dashboard = () => {
+const Dashboard = memo(() => {
 	return (
 		<Box
 			sx={{
@@ -44,6 +44,6 @@ const Dashboard = () => {
 			</Box>
 		</Box>
 	);
-};
+});
 
 export default Dashboard;

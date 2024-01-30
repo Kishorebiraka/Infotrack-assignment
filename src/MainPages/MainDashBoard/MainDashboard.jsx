@@ -3,6 +3,7 @@ import { Box } from "@mui/material";
 import Dashboard from "./DashboardSection/Dashboard";
 import SelectedRecords from "./SelectedRecordsSection/SelectedRecords";
 import Records from "./RecordsSection/Records";
+import GoogleMaps from "./GoogleMapsSection/GoogleMaps";
 
 const MainDashboard = () => {
 	return (
@@ -18,6 +19,7 @@ const MainDashboard = () => {
 			overflow={"auto"}
 		>
 			<Dashboard />
+			<GoogleMaps />
 			<SelectedRecords />
 			<Records />
 		</Box>
